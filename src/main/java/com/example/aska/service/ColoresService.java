@@ -13,24 +13,24 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class ColoresService {
-    
+
     @Autowired
     private ColoresRepository coloresRepository;
-    
-    public List<Colores> findAll(){
+
+    public List<Colores> findAll() {
         return coloresRepository.findAll();
     }
 
-    public Colores findById(Integer id){
+    public Colores findById(Integer id) {
         return coloresRepository.findById(id).orElseThrow();
     }
 
-    public Colores save(Colores color){
+    public Colores save(Colores color) {
         return coloresRepository.save(color);
     }
-    
-    public void deleteById(Integer id){
+
+    public void deleteById(Integer id) {
         coloresRepository.deleteById(id);
     }
-//preguntar patch al profe por no tener atributos propios
+    // preguntar patch al profe por no tener atributos propios
 }

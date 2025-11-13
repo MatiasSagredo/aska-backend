@@ -16,32 +16,31 @@ public class MarcaService {
 
     @Autowired
     private MarcaRepository marcaRepository;
-    
-    public List<Marca> findAll(){
+
+    public List<Marca> findAll() {
         return marcaRepository.findAll();
     }
 
-    public Marca findById(Integer id){
+    public Marca findById(Integer id) {
         return marcaRepository.findById(id).orElseThrow();
     }
 
-    public Marca save(Marca marca){
+    public Marca save(Marca marca) {
         return marcaRepository.save(marca);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         marcaRepository.deleteById(id);
     }
 
+    public Marca patchMarca(Integer id, Marca parcialMarca) {
 
-    public Marca patchMarca(Integer id, Marca parcialMarca){
+        Marca listaToUpdate = findById(id);
 
-        Marca listaToUpdate =findById(id);
-            
         if (parcialMarca.getNombreMarca() != null) {
-                listaToUpdate.setNombreMarca(parcialMarca.getNombreMarca());   
+            listaToUpdate.setNombreMarca(parcialMarca.getNombreMarca());
         }
 
         return marcaRepository.save(listaToUpdate);
-    } 
+    }
 }

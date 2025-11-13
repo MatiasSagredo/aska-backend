@@ -20,7 +20,7 @@ import com.example.aska.service.MarcaService;
 @RestController
 @RequestMapping("/api/marca")
 public class MarcaController {
- 
+
     @Autowired
     private MarcaService marcaService;
 
@@ -49,32 +49,32 @@ public class MarcaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Marca> updateMarca(@PathVariable Integer id,@RequestBody Marca marca) {
-    Marca existing = marcaService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Marca> updateMarca(@PathVariable Integer id, @RequestBody Marca marca) {
+        Marca existing = marcaService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         marca.setIdMarca(id);
         Marca updated = marcaService.save(marca);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Marca> patchMarca(@PathVariable Integer id,@RequestBody Marca marca) {
+    public ResponseEntity<Marca> patchMarca(@PathVariable Integer id, @RequestBody Marca marca) {
         Marca patchedMarca = marcaService.patchMarca(id, marca);
         if (patchedMarca == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedMarca);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMarca(@PathVariable Integer id) {
         if (marcaService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         marcaService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-       
+
 }

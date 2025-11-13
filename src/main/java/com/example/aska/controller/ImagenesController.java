@@ -17,11 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aska.model.Imagenes;
 import com.example.aska.service.ImagenesService;
 
-
 @RestController
 @RequestMapping("/api/Imagenes")
 public class ImagenesController {
-    
+
     @Autowired
     private ImagenesService imagenesService;
 
@@ -50,32 +49,32 @@ public class ImagenesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Imagenes> updateImagenes(@PathVariable Integer id,@RequestBody Imagenes imagenes) {
-    Imagenes existing = imagenesService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Imagenes> updateImagenes(@PathVariable Integer id, @RequestBody Imagenes imagenes) {
+        Imagenes existing = imagenesService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         imagenes.setIdImagen(id);
         Imagenes updated = imagenesService.save(imagenes);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Imagenes> patchImagenes(@PathVariable Integer id,@RequestBody Imagenes imagenes) {
+    public ResponseEntity<Imagenes> patchImagenes(@PathVariable Integer id, @RequestBody Imagenes imagenes) {
         Imagenes patchedImagenes = imagenesService.patchImagenes(id, imagenes);
         if (patchedImagenes == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedImagenes);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteImagenes(@PathVariable Integer id) {
         if (imagenesService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         imagenesService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-      
+
 }

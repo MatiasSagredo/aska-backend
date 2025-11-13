@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aska.model.Grado;
 import com.example.aska.service.GradoService;
 
-
 @RestController
 @RequestMapping("/api/grado")
 public class GradoController {
-    
 
     @Autowired
     private GradoService gradoService;
@@ -51,32 +49,32 @@ public class GradoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Grado> updateGrado(@PathVariable Integer id,@RequestBody Grado grado) {
-    Grado existing = gradoService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Grado> updateGrado(@PathVariable Integer id, @RequestBody Grado grado) {
+        Grado existing = gradoService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         grado.setIdGrado(id);
         Grado updated = gradoService.save(grado);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Grado> patchGrado(@PathVariable Integer id,@RequestBody Grado grado) {
+    public ResponseEntity<Grado> patchGrado(@PathVariable Integer id, @RequestBody Grado grado) {
         Grado patchedGrado = gradoService.patchGrado(id, grado);
         if (patchedGrado == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedGrado);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrado(@PathVariable Integer id) {
         if (gradoService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         gradoService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-    
+
 }

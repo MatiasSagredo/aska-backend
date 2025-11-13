@@ -20,7 +20,7 @@ import com.example.aska.service.MaterialService;
 @RestController
 @RequestMapping("/api/material")
 public class MaterialController {
-    
+
     @Autowired
     private MaterialService materialService;
 
@@ -49,18 +49,18 @@ public class MaterialController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Material> updateMaterial(@PathVariable Integer id,@RequestBody Material material) {
-    Material existing = materialService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Material> updateMaterial(@PathVariable Integer id, @RequestBody Material material) {
+        Material existing = materialService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         material.setIdMaterial(id);
         Material updated = materialService.save(material);
         return ResponseEntity.ok(updated);
     }
-    
+
     @PatchMapping("/{id}")
-    public ResponseEntity<Material> patchMaterial(@PathVariable Integer id,@RequestBody Material material) {
+    public ResponseEntity<Material> patchMaterial(@PathVariable Integer id, @RequestBody Material material) {
         Material patchedMaterial = materialService.patchMaterial(id, material);
         if (patchedMaterial == null) {
             return ResponseEntity.notFound().build();
@@ -74,7 +74,7 @@ public class MaterialController {
             return ResponseEntity.notFound().build();
         }
         materialService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aska.model.Grados;
 import com.example.aska.service.GradosService;
 
-
 @RestController
 @RequestMapping("/api/grados")
 public class GradosController {
@@ -49,31 +48,33 @@ public class GradosController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Grados> updateGrados(@PathVariable Integer id,@RequestBody Grados grados) {
-    Grados existing = gradosService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Grados> updateGrados(@PathVariable Integer id, @RequestBody Grados grados) {
+        Grados existing = gradosService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         grados.setIdGrados(id);
         Grados updated = gradosService.save(grados);
         return ResponseEntity.ok(updated);
     }
-/* 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Grados> patchGrados(@PathVariable Integer id,@RequestBody Grados grados) {
-        Grados patchedGrados = gradosService.patchGrados(id, grados);
-        if (patchedGrados == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(patchedGrados);
-    }
-*/    
+
+    /*
+     * @PatchMapping("/{id}")
+     * public ResponseEntity<Grados> patchGrados(@PathVariable Integer
+     * id,@RequestBody Grados grados) {
+     * Grados patchedGrados = gradosService.patchGrados(id, grados);
+     * if (patchedGrados == null) {
+     * return ResponseEntity.notFound().build();
+     * }
+     * return ResponseEntity.ok(patchedGrados);
+     * }
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteGrados(@PathVariable Integer id) {
         if (gradosService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         gradosService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 }

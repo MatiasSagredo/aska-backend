@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.aska.model.Tallas;
 import com.example.aska.service.TallasService;
 
-
 @RestController
 @RequestMapping("/api/tallas")
 public class TallasController {
-    
-        @Autowired
+
+    @Autowired
     private TallasService tallasService;
 
     @GetMapping
@@ -49,32 +48,33 @@ public class TallasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Tallas> updateTallas(@PathVariable Integer id,@RequestBody Tallas tallas) {
-    Tallas existing = tallasService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Tallas> updateTallas(@PathVariable Integer id, @RequestBody Tallas tallas) {
+        Tallas existing = tallasService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         tallas.setIdTallas(id);
         Tallas updated = tallasService.save(tallas);
         return ResponseEntity.ok(updated);
     }
 
-/* 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Tallas> patchTallas(@PathVariable Integer id,@RequestBody Tallas tallas) {
-        Tallas patchedTallas = tallasService.patchTallas(id, tallas);
-        if (patchedTallas == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(patchedTallas);
-    }
-*/    
+    /*
+     * @PatchMapping("/{id}")
+     * public ResponseEntity<Tallas> patchTallas(@PathVariable Integer
+     * id,@RequestBody Tallas tallas) {
+     * Tallas patchedTallas = tallasService.patchTallas(id, tallas);
+     * if (patchedTallas == null) {
+     * return ResponseEntity.notFound().build();
+     * }
+     * return ResponseEntity.ok(patchedTallas);
+     * }
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTallas(@PathVariable Integer id) {
         if (tallasService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         tallasService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 }

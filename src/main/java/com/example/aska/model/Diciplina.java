@@ -1,6 +1,5 @@
 package com.example.aska.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,20 +11,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table( name = "Diciplina")
+@Table(name = "Diciplina")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Diciplina {
-    
+
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idDiciplina;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String nombreDiciplina;
-    
+
 }
-
-    
-

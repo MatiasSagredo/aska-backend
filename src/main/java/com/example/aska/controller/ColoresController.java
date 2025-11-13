@@ -51,32 +51,34 @@ public class ColoresController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Colores> updateColores(@PathVariable Integer id,@RequestBody Colores colores) {
-    Colores existing = coloresService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Colores> updateColores(@PathVariable Integer id, @RequestBody Colores colores) {
+        Colores existing = coloresService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         colores.setIdColores(id);
         Colores updated = coloresService.save(colores);
         return ResponseEntity.ok(updated);
     }
-/* 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Colores> patchColores(@PathVariable Integer id,@RequestBody Colores colores) {
-        Colores patchedColores = coloresService.patchColores(id, colores);
-        if (patchedColores == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(patchedColores);
-    }
-*/    
+
+    /*
+     * @PatchMapping("/{id}")
+     * public ResponseEntity<Colores> patchColores(@PathVariable Integer
+     * id,@RequestBody Colores colores) {
+     * Colores patchedColores = coloresService.patchColores(id, colores);
+     * if (patchedColores == null) {
+     * return ResponseEntity.notFound().build();
+     * }
+     * return ResponseEntity.ok(patchedColores);
+     * }
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteColores(@PathVariable Integer id) {
         if (coloresService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         coloresService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -10,28 +10,27 @@ import com.example.aska.repository.GradosRepository;
 
 import jakarta.transaction.Transactional;
 
-
 @Service
 @Transactional
 public class GradosService {
-        
+
     @Autowired
     private GradosRepository gradosRepository;
-    
-    public List<Grados> findAll(){
+
+    public List<Grados> findAll() {
         return gradosRepository.findAll();
     }
 
-    public Grados findById(Integer id){
+    public Grados findById(Integer id) {
         return gradosRepository.findById(id).orElseThrow();
     }
 
-    public Grados save(Grados grados){
+    public Grados save(Grados grados) {
         return gradosRepository.save(grados);
     }
-    
-    public void deleteById(Integer id){
+
+    public void deleteById(Integer id) {
         gradosRepository.deleteById(id);
     }
-//preguntar patch al profe por no tener atributos propios
+    // preguntar patch al profe por no tener atributos propios
 }

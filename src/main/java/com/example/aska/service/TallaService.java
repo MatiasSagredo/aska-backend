@@ -13,35 +13,34 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class TallaService {
-    
 
     @Autowired
     private TallaRepository tallaRepository;
-    
-    public List<Talla> findAll(){
+
+    public List<Talla> findAll() {
         return tallaRepository.findAll();
     }
 
-    public Talla findById(Integer id){
+    public Talla findById(Integer id) {
         return tallaRepository.findById(id).orElseThrow();
     }
 
-    public Talla save(Talla marca){
+    public Talla save(Talla marca) {
         return tallaRepository.save(marca);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         tallaRepository.deleteById(id);
     }
 
-    public Talla patchTalla(Integer id, Talla parcialTalla){
+    public Talla patchTalla(Integer id, Talla parcialTalla) {
 
-        Talla listaToUpdate =findById(id);
-            
+        Talla listaToUpdate = findById(id);
+
         if (parcialTalla.getNombreTalla() != null) {
-                listaToUpdate.setNombreTalla(parcialTalla.getNombreTalla());   
+            listaToUpdate.setNombreTalla(parcialTalla.getNombreTalla());
         }
 
         return tallaRepository.save(listaToUpdate);
-    } 
+    }
 }

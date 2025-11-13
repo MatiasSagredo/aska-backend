@@ -10,41 +10,38 @@ import com.example.aska.repository.ImagenesRepository;
 
 import jakarta.transaction.Transactional;
 
-
-
 @Service
 @Transactional
 public class ImagenesService {
-    
+
     @Autowired
     private ImagenesRepository imagenesRepository;
-    
-    public List<Imagenes> findAll(){
+
+    public List<Imagenes> findAll() {
         return imagenesRepository.findAll();
     }
 
-    public Imagenes findById(Integer id){
+    public Imagenes findById(Integer id) {
         return imagenesRepository.findById(id).orElseThrow();
     }
 
-    public Imagenes save(Imagenes imagenes){
+    public Imagenes save(Imagenes imagenes) {
         return imagenesRepository.save(imagenes);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         imagenesRepository.deleteById(id);
     }
 
+    public Imagenes patchImagenes(Integer id, Imagenes parcialImagenes) {
 
-    public Imagenes patchImagenes(Integer id, Imagenes parcialImagenes){
+        Imagenes listaToUpdate = findById(id);
 
-        Imagenes listaToUpdate =findById(id);
-            
         if (parcialImagenes.getUrlImagen() != null) {
-                listaToUpdate.setUrlImagen(parcialImagenes.getUrlImagen());   
+            listaToUpdate.setUrlImagen(parcialImagenes.getUrlImagen());
         }
 
         return imagenesRepository.save(listaToUpdate);
-    } 
+    }
 
 }

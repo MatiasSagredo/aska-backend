@@ -20,7 +20,7 @@ import com.example.aska.service.ProductoService;
 @RestController
 @RequestMapping("/api/producto")
 public class ProductoController {
-    
+
     @Autowired
     private ProductoService productoService;
 
@@ -49,32 +49,32 @@ public class ProductoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Producto> updateProducto(@PathVariable Integer id,@RequestBody Producto producto) {
-    Producto existing = productoService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Producto> updateProducto(@PathVariable Integer id, @RequestBody Producto producto) {
+        Producto existing = productoService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         producto.setIdProducto(id);
         Producto updated = productoService.save(producto);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Producto> patchProducto(@PathVariable Integer id,@RequestBody Producto producto) {
+    public ResponseEntity<Producto> patchProducto(@PathVariable Integer id, @RequestBody Producto producto) {
         Producto patchedProducto = productoService.patchProducto(id, producto);
         if (patchedProducto == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedProducto);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteProducto(@PathVariable Integer id) {
         if (productoService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         productoService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-        
+
 }

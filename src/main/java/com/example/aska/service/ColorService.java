@@ -14,35 +14,33 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class ColorService {
 
-
     @Autowired
     private ColorRepository colorRepository;
-    
-    public List<Color> findAll(){
+
+    public List<Color> findAll() {
         return colorRepository.findAll();
     }
 
-    public Color findById(Integer id){
+    public Color findById(Integer id) {
         return colorRepository.findById(id).orElseThrow();
     }
 
-    public Color save(Color color){
+    public Color save(Color color) {
         return colorRepository.save(color);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         colorRepository.deleteById(id);
     }
 
+    public Color patchColor(Integer id, Color parcialColor) {
 
-    public Color patchColor(Integer id, Color parcialColor){
+        Color listaToUpdate = findById(id);
 
-        Color listaToUpdate =findById(id);
-            
         if (parcialColor.getNombreColor() != null) {
-                listaToUpdate.setNombreColor(parcialColor.getNombreColor());   
+            listaToUpdate.setNombreColor(parcialColor.getNombreColor());
         }
 
         return colorRepository.save(listaToUpdate);
-    } 
+    }
 }

@@ -13,23 +13,21 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table( name = "Imagenes")
+@Table(name = "Imagenes")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Imagenes {
-    
+
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idImagen;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String urlImagen;
 
-    @ManyToOne 
+    @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
-    private  Producto idProducto;
+    private Producto idProducto;
 
-    
 }
-    

@@ -11,19 +11,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table( name = "Marca")
+@Table(name = "Marca")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Marca { 
-       
+public class Marca {
+
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMarca;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String nombreMarca;
-    
+
 }
-
-

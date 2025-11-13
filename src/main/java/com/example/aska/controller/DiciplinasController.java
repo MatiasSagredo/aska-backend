@@ -48,32 +48,35 @@ public class DiciplinasController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Diciplinas> updateDiciplinas(@PathVariable Integer id,@RequestBody Diciplinas diciplinas) {
-    Diciplinas existing = diciplinasService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Diciplinas> updateDiciplinas(@PathVariable Integer id, @RequestBody Diciplinas diciplinas) {
+        Diciplinas existing = diciplinasService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         diciplinas.setIdDiciplinas(id);
         Diciplinas updated = diciplinasService.save(diciplinas);
         return ResponseEntity.ok(updated);
     }
-/* 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Diciplinas> patchDiciplinas(@PathVariable Integer id,@RequestBody Diciplinas diciplinas) {
-        Diciplinas patchedDiciplinas = diciplinasService.patchDiciplinas(id, diciplinas);
-        if (patchedDiciplinas == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(patchedDiciplinas);
-    }
-*/    
+
+    /*
+     * @PatchMapping("/{id}")
+     * public ResponseEntity<Diciplinas> patchDiciplinas(@PathVariable Integer
+     * id,@RequestBody Diciplinas diciplinas) {
+     * Diciplinas patchedDiciplinas = diciplinasService.patchDiciplinas(id,
+     * diciplinas);
+     * if (patchedDiciplinas == null) {
+     * return ResponseEntity.notFound().build();
+     * }
+     * return ResponseEntity.ok(patchedDiciplinas);
+     * }
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDiciplinas(@PathVariable Integer id) {
         if (diciplinasService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         diciplinasService.deleteById(id);
-        return ResponseEntity.noContent().build();  
-    }    
-    
-} 
+        return ResponseEntity.noContent().build();
+    }
+
+}

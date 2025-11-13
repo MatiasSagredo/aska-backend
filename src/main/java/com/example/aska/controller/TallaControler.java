@@ -20,7 +20,7 @@ import com.example.aska.service.TallaService;
 @RestController
 @RequestMapping("/api/talla")
 public class TallaControler {
-    
+
     @Autowired
     private TallaService tallaService;
 
@@ -49,32 +49,32 @@ public class TallaControler {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Talla> updateTalla(@PathVariable Integer id,@RequestBody Talla talla) {
-    Talla existing = tallaService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Talla> updateTalla(@PathVariable Integer id, @RequestBody Talla talla) {
+        Talla existing = tallaService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         talla.setIdTalla(id);
         Talla updated = tallaService.save(talla);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Talla> patchTalla(@PathVariable Integer id,@RequestBody Talla talla) {
+    public ResponseEntity<Talla> patchTalla(@PathVariable Integer id, @RequestBody Talla talla) {
         Talla patchedTalla = tallaService.patchTalla(id, talla);
         if (patchedTalla == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedTalla);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTalla(@PathVariable Integer id) {
         if (tallaService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         tallaService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-        
+
 }

@@ -68,14 +68,14 @@ public class ColorController {
         }
         return ResponseEntity.ok(patchedColor);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteColor(@PathVariable Integer id) {
         if (colorService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         colorService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-        
+
 }

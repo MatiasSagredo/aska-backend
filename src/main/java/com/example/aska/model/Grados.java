@@ -12,23 +12,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table( name = "Grados")
+@Table(name = "Grados")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Grados {
-    
+
     @Id
-    @GeneratedValue (strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idGrados;
 
-    @ManyToOne 
+    @ManyToOne
     @JoinColumn(name = "idGrado", nullable = false)
-    private  Grado idGrado;
+    private Grado idGrado;
 
-    @ManyToOne 
+    @ManyToOne
     @JoinColumn(name = "idProducto", nullable = false)
-    private  Producto idProducto;
-
+    private Producto idProducto;
 
 }

@@ -20,7 +20,7 @@ import com.example.aska.service.DiciplinaService;
 @RestController
 @RequestMapping("/api/diciplina")
 public class DiciplinaController {
-    
+
     @Autowired
     private DiciplinaService diciplinaService;
 
@@ -49,32 +49,32 @@ public class DiciplinaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Diciplina> updateDiciplinas(@PathVariable Integer id,@RequestBody Diciplina diciplina) {
-    Diciplina existing = diciplinaService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Diciplina> updateDiciplinas(@PathVariable Integer id, @RequestBody Diciplina diciplina) {
+        Diciplina existing = diciplinaService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         diciplina.setIdDiciplina(id);
         Diciplina updated = diciplinaService.save(diciplina);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Diciplina> patchDiciplina(@PathVariable Integer id,@RequestBody Diciplina diciplina) {
+    public ResponseEntity<Diciplina> patchDiciplina(@PathVariable Integer id, @RequestBody Diciplina diciplina) {
         Diciplina patchedDiciplina = diciplinaService.patchDiciplina(id, diciplina);
         if (patchedDiciplina == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(patchedDiciplina);
     }
-    
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteDiciplina(@PathVariable Integer id) {
         if (diciplinaService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         diciplinaService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
-    
+
 }

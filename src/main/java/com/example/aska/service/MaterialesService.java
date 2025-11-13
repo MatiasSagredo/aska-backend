@@ -13,24 +13,24 @@ import jakarta.transaction.Transactional;
 @Service
 @Transactional
 public class MaterialesService {
- 
+
     @Autowired
     private MaterialesRepository materialesRepository;
-    
-    public List<Materiales> findAll(){
+
+    public List<Materiales> findAll() {
         return materialesRepository.findAll();
     }
 
-    public Materiales findById(Integer id){
+    public Materiales findById(Integer id) {
         return materialesRepository.findById(id).orElseThrow();
     }
 
-    public Materiales save(Materiales materiales){
+    public Materiales save(Materiales materiales) {
         return materialesRepository.save(materiales);
     }
-    
-    public void deleteById(Integer id){
+
+    public void deleteById(Integer id) {
         materialesRepository.deleteById(id);
     }
-//preguntar patch al profe por no tener atributos propios
+    // preguntar patch al profe por no tener atributos propios
 }

@@ -20,7 +20,6 @@ import com.example.aska.service.MaterialesService;
 @RequestMapping("/api/materiales")
 public class MaterialesController {
 
-    
     @Autowired
     private MaterialesService materialesService;
 
@@ -49,31 +48,34 @@ public class MaterialesController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Materiales> updateMateriales(@PathVariable Integer id,@RequestBody Materiales materiales) {
-    Materiales existing = materialesService.findById(id);
-    if (existing == null) {
-        return ResponseEntity.notFound().build();
-    }
+    public ResponseEntity<Materiales> updateMateriales(@PathVariable Integer id, @RequestBody Materiales materiales) {
+        Materiales existing = materialesService.findById(id);
+        if (existing == null) {
+            return ResponseEntity.notFound().build();
+        }
         materiales.setIdMateriales(id);
         Materiales updated = materialesService.save(materiales);
         return ResponseEntity.ok(updated);
     }
-/* 
-    @PatchMapping("/{id}")
-    public ResponseEntity<Materiales> patchMateriales(@PathVariable Integer id,@RequestBody Materiales materiales) {
-        Materiales patchedMateriales = materialesService.patchMateriales(id, materiales);
-        if (patchedMateriales == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(patchedMateriales);
-    }
-*/    
+
+    /*
+     * @PatchMapping("/{id}")
+     * public ResponseEntity<Materiales> patchMateriales(@PathVariable Integer
+     * id,@RequestBody Materiales materiales) {
+     * Materiales patchedMateriales = materialesService.patchMateriales(id,
+     * materiales);
+     * if (patchedMateriales == null) {
+     * return ResponseEntity.notFound().build();
+     * }
+     * return ResponseEntity.ok(patchedMateriales);
+     * }
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMateriales(@PathVariable Integer id) {
         if (materialesService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         materialesService.deleteById(id);
-        return ResponseEntity.noContent().build();  
+        return ResponseEntity.noContent().build();
     }
 }

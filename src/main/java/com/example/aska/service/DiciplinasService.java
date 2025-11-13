@@ -10,28 +10,27 @@ import com.example.aska.repository.DiciplinasRepository;
 
 import jakarta.transaction.Transactional;
 
-
 @Service
 @Transactional
 public class DiciplinasService {
 
     @Autowired
     private DiciplinasRepository diciplinasRepository;
-    
-    public List<Diciplinas> findAll(){
+
+    public List<Diciplinas> findAll() {
         return diciplinasRepository.findAll();
     }
 
-    public Diciplinas findById(Integer id){
+    public Diciplinas findById(Integer id) {
         return diciplinasRepository.findById(id).orElseThrow();
     }
 
-    public Diciplinas save(Diciplinas diciplinas){
+    public Diciplinas save(Diciplinas diciplinas) {
         return diciplinasRepository.save(diciplinas);
     }
 
-    public void deleteById(Integer id){
+    public void deleteById(Integer id) {
         diciplinasRepository.deleteById(id);
     }
-//preguntar patch al profe por no tener atributos propios
+    // preguntar patch al profe por no tener atributos propios
 }
