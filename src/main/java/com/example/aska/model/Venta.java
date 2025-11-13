@@ -1,7 +1,5 @@
 package com.example.aska.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,26 +13,31 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "Venta")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Usuario {
+public class Venta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idUsuario;
+    private Integer idVenta;
 
-    @Column(nullable = false)
-    private String nombreUsuario;
-
-    @Column(nullable = false)
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private String contrasenaUsuario;
-
-    @Column(nullable = false)
-    private String emailUsuario;
+    @Column(nullable = true)
+    private Integer total;
 
     @ManyToOne
-    @JoinColumn(name = "idRol", nullable = false)
-    private Rol idRol;
+    @JoinColumn(name = "idEstado", nullable = false)
+    private Estado idEstado;
+
+    @ManyToOne
+    @JoinColumn(name = "idMetodoPago", nullable = false)
+    private MetodoPago idMetodoPago;
+
+    @ManyToOne
+    @JoinColumn(name = "idMetodoEnvio", nullable = false)
+    private MetodoEnvio idMetodoEnvio;
+
+    @ManyToOne
+    @JoinColumn(name = "idUsuario", nullable = false)
+    private Usuario idMUsuario;
 }
