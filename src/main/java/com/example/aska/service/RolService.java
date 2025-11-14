@@ -26,15 +26,15 @@ public class RolService {
         return rolRepository.findById(id).orElseThrow();
     }
 
-    public Rol save(Rol marca) {
-        return rolRepository.save(marca);
+    public Rol save(Rol rol) {
+        return rolRepository.save(rol);
     }
 
     public void deleteById(Integer id) {
         rolRepository.deleteById(id);
     }
 
-    public Rol patchTalla(Integer id, Rol parcialRol) {
+    public Rol patchRol(Integer id, Rol parcialRol) {
 
         Rol listaToUpdate = findById(id);
 

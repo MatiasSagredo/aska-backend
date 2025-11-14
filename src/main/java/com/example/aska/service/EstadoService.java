@@ -29,6 +29,16 @@ public class EstadoService {
         return estadoRepository.save(diciplinas);
     }
 
+    public Estado patchEstado(Integer id, Estado estado) {
+        Estado existingEstado = estadoRepository.findById(id).orElseThrow();
+
+        if (estado.getEstado() != null) {
+            existingEstado.setEstado(estado.getEstado());
+        }
+
+        return estadoRepository.save(existingEstado);
+    }
+
     public void deleteById(Integer id) {
         estadoRepository.deleteById(id);
     }

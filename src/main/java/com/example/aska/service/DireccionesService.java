@@ -29,6 +29,16 @@ public class DireccionesService {
         return direccionesService.save(diciplinas);
     }
 
+    public Direcciones patchDirecciones(Integer id, Direcciones direcciones) {
+        Direcciones existing = findById(id);
+
+        if (direcciones.getNombreCalle() != null) {
+            existing.setNombreCalle(direcciones.getNombreCalle());
+        }
+
+        return direccionesService.save(existing);
+    }
+
     public void deleteById(Integer id) {
         direccionesService.deleteById(id);
     }

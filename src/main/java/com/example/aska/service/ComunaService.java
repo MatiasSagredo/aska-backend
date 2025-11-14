@@ -29,6 +29,16 @@ public class ComunaService {
         return comunaRepository.save(diciplinas);
     }
 
+    public Comuna patchComuna(Integer id, Comuna comuna) {
+        Comuna existingComuna = comunaRepository.findById(comuna.getIdComuna()).orElseThrow();
+
+        if (comuna.getNombreComuna() != null) {
+            existingComuna.setNombreComuna(comuna.getNombreComuna());
+        }
+
+        return comunaRepository.save(existingComuna);
+    }
+
     public void deleteById(Integer id) {
         comunaRepository.deleteById(id);
     }

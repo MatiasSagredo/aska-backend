@@ -29,8 +29,17 @@ public class MetodoPagoService {
         return metodoPagoRepository.save(diciplinas);
     }
 
+    public MetodoPago patchMetodoPago(Integer id, MetodoPago metodoPago) {
+        MetodoPago existingMetodoPago = metodoPagoRepository.findById(id).orElseThrow();
+
+        if (metodoPago.getIdMetodoPago() != null) {
+            existingMetodoPago.setMetodoPago(metodoPago.getMetodoPago());
+        }
+
+        return metodoPagoRepository.save(existingMetodoPago);
+    }
+
     public void deleteById(Integer id) {
         metodoPagoRepository.deleteById(id);
     }
-    // preguntar patch al profe por no tener atributos propios
 }

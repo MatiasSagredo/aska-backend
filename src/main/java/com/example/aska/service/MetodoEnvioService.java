@@ -29,8 +29,17 @@ public class MetodoEnvioService {
         return metodoEnvioRepository.save(diciplinas);
     }
 
+    public MetodoEnvio patchMetodoEnvio(Integer id, MetodoEnvio metodoEnvio) {
+        MetodoEnvio existingMetodoEnvio = metodoEnvioRepository.findById(id).orElseThrow();
+
+        if (metodoEnvio.getMetodoEnvio() != null) {
+            existingMetodoEnvio.setMetodoEnvio(metodoEnvio.getMetodoEnvio());
+        }
+
+        return metodoEnvioRepository.save(existingMetodoEnvio);
+    }
+
     public void deleteById(Integer id) {
         metodoEnvioRepository.deleteById(id);
     }
-    // preguntar patch al profe por no tener atributos propios
 }

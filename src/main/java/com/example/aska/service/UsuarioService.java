@@ -34,18 +34,13 @@ public class UsuarioService {
         usuario.setContrasenaUsuario(passwordHasheada);
         return usuarioRepository.save(usuario);
     }
-
-    public Usuario update(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
-
     public void deleteById(Integer id) {
         usuarioRepository.deleteById(id);
     }
 
-    public Usuario patchTalla(Integer id, Usuario parcialUsuario) {
+    public Usuario patchUsuario(Integer id, Usuario parcialUsuario) {
 
-        Usuario existingUsuario = usuarioRepository.findById(parcialUsuario.getIdUsuario()).orElse(null);
+        Usuario existingUsuario = findById(id);
 
         if (existingUsuario != null) {
             if (parcialUsuario.getNombreUsuario() != null) {
