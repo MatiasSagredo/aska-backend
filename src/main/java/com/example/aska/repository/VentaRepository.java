@@ -5,4 +5,4 @@ import org.springframework.stereotype.Repository;
 
 import com.example.aska.model.Venta;
 @Repository
-public interface VentaRepository extends JpaRepository<Venta, Integer>{}
+public interface VentaRepository extends JpaRepository<Venta, Integer> {}

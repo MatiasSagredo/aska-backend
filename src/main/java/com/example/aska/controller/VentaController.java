@@ -25,42 +25,42 @@ public class VentaController {
 
     @GetMapping
     public ResponseEntity<List<Venta>> getAllTalla() {
-        List<Venta> talla = ventaService.findAll();
-        if (talla.isEmpty()) {
+        List<Venta> venta = ventaService.findAll();
+        if (venta.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok(talla);
+        return ResponseEntity.ok(venta);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Venta> getTallaById(@PathVariable Integer id) {
-        Venta talla = ventaService.findById(id);
-        if (talla == null) {
+        Venta venta = ventaService.findById(id);
+        if (venta == null) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(talla);
+        return ResponseEntity.ok(venta);
     }
 
     @PostMapping
-    public ResponseEntity<Venta> createTalla(@RequestBody Venta talla) {
-        Venta createdTalla = ventaService.save(talla);
+    public ResponseEntity<Venta> createTalla(@RequestBody Venta venta) {
+        Venta createdTalla = ventaService.save(venta);
         return ResponseEntity.status(201).body(createdTalla);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Venta> updateTalla(@PathVariable Integer id, @RequestBody Venta talla) {
+    public ResponseEntity<Venta> updateTalla(@PathVariable Integer id, @RequestBody Venta venta) {
         Venta existing = ventaService.findById(id);
         if (existing == null) {
             return ResponseEntity.notFound().build();
         }
-        talla.setIdVenta(id);
-        Venta updated = ventaService.save(talla);
+        venta.setIdVenta(id);
+        Venta updated = ventaService.save(venta);
         return ResponseEntity.ok(updated);
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<Venta> patchTalla(@PathVariable Integer id, @RequestBody Venta talla) {
-        Venta patchedVenta = ventaService.patchTalla(id, talla);
+    public ResponseEntity<Venta> patchTalla(@PathVariable Integer id, @RequestBody Venta venta) {
+        Venta patchedVenta = ventaService.patchTalla(id, venta);
         if (patchedVenta == null) {
             return ResponseEntity.notFound().build();
         }

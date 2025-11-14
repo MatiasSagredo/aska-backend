@@ -2,6 +2,7 @@ package com.example.aska.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Venta;
@@ -12,6 +13,8 @@ import jakarta.transaction.Transactional;
 @Transactional
 @Service
 public class VentaService {
+
+    @Autowired
     private VentaRepository ventaRepository;
 
     public List<Venta> findAll() {
