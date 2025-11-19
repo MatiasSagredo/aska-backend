@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Colores;
+import com.example.aska.repository.ColorRepository;
 import com.example.aska.repository.ColoresRepository;
+import com.example.aska.repository.ProductoRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +18,9 @@ public class ColoresService {
 
     @Autowired
     private ColoresRepository coloresRepository;
+
+    @Autowired
+    private ColorRepository colorRepository;
 
     public List<Colores> findAll() {
         return coloresRepository.findAll();
@@ -32,5 +37,4 @@ public class ColoresService {
     public void deleteById(Integer id) {
         coloresRepository.deleteById(id);
     }
-    // preguntar patch al profe por no tener atributos propios
 }

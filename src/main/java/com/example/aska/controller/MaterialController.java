@@ -18,7 +18,7 @@ import com.example.aska.model.Material;
 import com.example.aska.service.MaterialService;
 
 @RestController
-@RequestMapping("/api/material")
+@RequestMapping("/api/v1/material")
 public class MaterialController {
 
     @Autowired

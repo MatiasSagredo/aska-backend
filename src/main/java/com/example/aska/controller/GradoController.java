@@ -18,7 +18,7 @@ import com.example.aska.model.Grado;
 import com.example.aska.service.GradoService;
 
 @RestController
-@RequestMapping("/api/grado")
+@RequestMapping("/api/v1/grado")
 public class GradoController {
 
     @Autowired

@@ -18,7 +18,7 @@ import com.example.aska.model.Usuario;
 import com.example.aska.service.UsuarioService;
 
 @RestController
-@RequestMapping("/api/usuarios")
+@RequestMapping("/api/v1/usuarios")
 
 public class UsuarioController {
     

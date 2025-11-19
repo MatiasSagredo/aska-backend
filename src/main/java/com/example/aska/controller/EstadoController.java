@@ -18,7 +18,7 @@ import com.example.aska.model.Estado;
 import com.example.aska.service.EstadoService;
 
 @RestController
-@RequestMapping("/api/estados")
+@RequestMapping("/api/v1/estados")
 
 public class EstadoController {
     

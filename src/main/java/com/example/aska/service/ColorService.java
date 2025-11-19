@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Color;
 import com.example.aska.repository.ColorRepository;
+import com.example.aska.repository.ColoresRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class ColorService {
 
     @Autowired
     private ColorRepository colorRepository;
+
+    @Autowired 
+    private ColoresRepository coloresRepository;
 
     public List<Color> findAll() {
         return colorRepository.findAll();
@@ -30,7 +34,6 @@ public class ColorService {
     }
 
     public void deleteById(Integer id) {
-        colorRepository.deleteById(id);
     }
 
     public Color patchColor(Integer id, Color parcialColor) {

@@ -18,7 +18,7 @@ import com.example.aska.model.Direcciones;
 import com.example.aska.service.DireccionesService;
 
 @RestController
-@RequestMapping("/api/direcciones")
+@RequestMapping("/api/v1/direcciones")
 
 public class DireccionesController {
     

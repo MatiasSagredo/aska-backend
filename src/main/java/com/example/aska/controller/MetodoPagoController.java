@@ -18,7 +18,7 @@ import com.example.aska.model.MetodoPago;
 import com.example.aska.service.MetodoPagoService;
 
 @RestController
-@RequestMapping("/api/metodopago")
+@RequestMapping("/api/v1/metodopago")
 
 public class MetodoPagoController {
     

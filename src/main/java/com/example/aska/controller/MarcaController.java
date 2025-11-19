@@ -18,7 +18,7 @@ import com.example.aska.model.Marca;
 import com.example.aska.service.MarcaService;
 
 @RestController
-@RequestMapping("/api/marca")
+@RequestMapping("/api/v1/marca")
 public class MarcaController {
 
     @Autowired

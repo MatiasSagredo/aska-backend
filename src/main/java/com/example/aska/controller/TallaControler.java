@@ -18,7 +18,7 @@ import com.example.aska.model.Talla;
 import com.example.aska.service.TallaService;
 
 @RestController
-@RequestMapping("/api/talla")
+@RequestMapping("/api/v1/talla")
 public class TallaControler {
 
     @Autowired

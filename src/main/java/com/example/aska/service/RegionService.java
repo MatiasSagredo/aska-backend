@@ -32,4 +32,16 @@ public class RegionService {
     public void deleteById(Integer id) {
         regionRepository.deleteById(id);
     }
+
+    public Region patchRegion(Integer id, Region parcialRegion) {
+        Region existingRegion = findById(id);
+        
+        if (existingRegion != null) {
+            if (parcialRegion.getNombreRegion() != null) {
+                existingRegion.setNombreRegion(parcialRegion.getNombreRegion());
+            }
+            return regionRepository.save(existingRegion);
+        }
+        return null;
+    }
 }

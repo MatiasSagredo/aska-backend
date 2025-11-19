@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @RestController
-@RequestMapping("/api/roles")
+@RequestMapping("/api/v1/roles")
 public class RolController {
     @Autowired
     private RolService rolService;

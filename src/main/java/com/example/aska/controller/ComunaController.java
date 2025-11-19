@@ -18,7 +18,7 @@ import com.example.aska.model.Comuna;
 import com.example.aska.service.ComunaService;
 
 @RestController
-@RequestMapping("/api/comunas")
+@RequestMapping("/api/v1/comunas")
 
 public class ComunaController {
     

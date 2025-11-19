@@ -18,7 +18,7 @@ import com.example.aska.model.Diciplina;
 import com.example.aska.service.DiciplinaService;
 
 @RestController
-@RequestMapping("/api/diciplina")
+@RequestMapping("/api/v1/diciplina")
 public class DiciplinaController {
 
     @Autowired

@@ -18,7 +18,7 @@ import com.example.aska.model.Venta;
 import com.example.aska.service.VentaService;
 
 @RestController
-@RequestMapping("/api/venta")
+@RequestMapping("/api/v1/venta")
 public class VentaController {
     @Autowired
     private VentaService ventaService;

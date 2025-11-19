@@ -18,7 +18,7 @@ import com.example.aska.model.MetodoEnvio;
 import com.example.aska.service.MetodoEnvioService;
 
 @RestController
-@RequestMapping("/api/metodoenvio")
+@RequestMapping("/api/v1/metodoenvio")
 
 public class MetodoEnvioController {
     

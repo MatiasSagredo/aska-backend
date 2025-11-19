@@ -18,7 +18,7 @@ import com.example.aska.model.Imagenes;
 import com.example.aska.service.ImagenesService;
 
 @RestController
-@RequestMapping("/api/Imagenes")
+@RequestMapping("/api/v1/Imagenes")
 public class ImagenesController {
 
     @Autowired
