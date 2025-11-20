@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Comuna;
 import com.example.aska.repository.ComunaRepository;
+import com.example.aska.repository.DireccionesRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class ComunaService {
 
     @Autowired
     private ComunaRepository comunaRepository;
+
+    @Autowired
+    private DireccionesRepository direccionesRepository;
 
     public List<Comuna> findAll() {
         return comunaRepository.findAll();
@@ -40,6 +44,19 @@ public class ComunaService {
     }
 
     public void deleteById(Integer id) {
-        comunaRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Comuna comuna = comunaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("comuna no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        direccionesRepository.deleteByIdComuna(comuna);
+
+        // Finalmente, eliminamos el estudiante
+        comunaRepository.delete(comuna);
     }
 }

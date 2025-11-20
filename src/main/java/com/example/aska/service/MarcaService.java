@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Marca;
 import com.example.aska.repository.MarcaRepository;
+import com.example.aska.repository.ProductoRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class MarcaService {
 
     @Autowired
     private MarcaRepository marcaRepository;
+
+    @Autowired
+    private ProductoRepository productoRepository;
 
     public List<Marca> findAll() {
         return marcaRepository.findAll();
@@ -30,7 +34,20 @@ public class MarcaService {
     }
 
     public void deleteById(Integer id) {
-        marcaRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Marca marca = marcaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("marca no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        productoRepository.deleteByIdMarca(marca);
+
+        // Finalmente, eliminamos el estudiante
+        marcaRepository.delete(marca);
     }
 
     public Marca patchMarca(Integer id, Marca parcialMarca) {

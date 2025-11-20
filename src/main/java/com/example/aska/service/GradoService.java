@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Grado;
 import com.example.aska.repository.GradoRepository;
+import com.example.aska.repository.GradosRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class GradoService {
 
     @Autowired
     private GradoRepository gradoRepository;
+
+    @Autowired
+    private GradosRepository gradosRepository;
 
     public List<Grado> findAll() {
         return gradoRepository.findAll();
@@ -30,7 +34,20 @@ public class GradoService {
     }
 
     public void deleteById(Integer id) {
-        gradoRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Grado grado = gradoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("grado no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        gradosRepository.deleteByIdGrado(grado);
+
+        // Finalmente, eliminamos el estudiante
+        gradoRepository.delete(grado);
     }
 
     public Grado patchGrado(Integer id, Grado parcialGrado) {

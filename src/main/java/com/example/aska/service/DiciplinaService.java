@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Diciplina;
 import com.example.aska.repository.DiciplinaRepository;
+import com.example.aska.repository.DiciplinasRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class DiciplinaService {
 
     @Autowired
     private DiciplinaRepository diciplinaRepository;
+
+    @Autowired
+    private DiciplinasRepository diciplinasRepository;
 
     public List<Diciplina> findAll() {
         return diciplinaRepository.findAll();
@@ -30,7 +34,20 @@ public class DiciplinaService {
     }
 
     public void deleteById(Integer id) {
-        diciplinaRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Diciplina diciplina = diciplinaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("diciplina no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        diciplinasRepository.deleteByIdDiciplina(diciplina);
+
+        // Finalmente, eliminamos el estudiante
+        diciplinaRepository.delete(diciplina);
     }
 
     public Diciplina patchDiciplina(Integer id, Diciplina parcialDiciplina) {

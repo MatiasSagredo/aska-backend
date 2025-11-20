@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Region;
+import com.example.aska.repository.ComunaRepository;
 import com.example.aska.repository.RegionRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +17,9 @@ public class RegionService {
 
     @Autowired
     private RegionRepository regionRepository;
+
+    @Autowired
+    private ComunaRepository comunaRepository;
 
     public List<Region> findAll() {
         return regionRepository.findAll();
@@ -30,12 +34,25 @@ public class RegionService {
     }
 
     public void deleteById(Integer id) {
-        regionRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Region region = regionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Region no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        comunaRepository.deleteByIdRegion(region);
+
+        // Finalmente, eliminamos el estudiante
+        regionRepository.delete(region);
     }
 
     public Region patchRegion(Integer id, Region parcialRegion) {
         Region existingRegion = findById(id);
-        
+
         if (existingRegion != null) {
             if (parcialRegion.getNombreRegion() != null) {
                 existingRegion.setNombreRegion(parcialRegion.getNombreRegion());

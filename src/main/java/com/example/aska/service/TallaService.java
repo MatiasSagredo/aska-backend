@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Talla;
 import com.example.aska.repository.TallaRepository;
+import com.example.aska.repository.TallasRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -16,6 +17,9 @@ public class TallaService {
 
     @Autowired
     private TallaRepository tallaRepository;
+
+    @Autowired
+    private TallasRepository tallasRepository;
 
     public List<Talla> findAll() {
         return tallaRepository.findAll();
@@ -30,7 +34,20 @@ public class TallaService {
     }
 
     public void deleteById(Integer id) {
-        tallaRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Talla talla = tallaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("talla no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        tallasRepository.deleteByIdTalla(talla);
+
+        // Finalmente, eliminamos el estudiante
+        tallaRepository.delete(talla);
     }
 
     public Talla patchTalla(Integer id, Talla parcialTalla) {

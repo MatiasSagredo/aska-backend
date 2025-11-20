@@ -8,4 +8,6 @@ import com.example.aska.model.Material;
 @Repository
 public interface MaterialRepository extends JpaRepository<Material, Integer> {
 
+
+
 }

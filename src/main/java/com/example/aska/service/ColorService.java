@@ -18,7 +18,7 @@ public class ColorService {
     @Autowired
     private ColorRepository colorRepository;
 
-    @Autowired 
+    @Autowired
     private ColoresRepository coloresRepository;
 
     public List<Color> findAll() {
@@ -34,6 +34,20 @@ public class ColorService {
     }
 
     public void deleteById(Integer id) {
+        // Primero, verificar si el estudiante existe
+        Color color = colorRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("color no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        coloresRepository.deleteByIdColor(color);
+
+        // Finalmente, eliminamos el estudiante
+        colorRepository.delete(color);
     }
 
     public Color patchColor(Integer id, Color parcialColor) {

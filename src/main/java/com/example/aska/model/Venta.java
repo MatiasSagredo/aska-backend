@@ -39,5 +39,5 @@ public class Venta {
 
     @ManyToOne
     @JoinColumn(name = "idUsuario", nullable = false)
-    private Usuario idMUsuario;
+    private Usuario idUsuario;
 }

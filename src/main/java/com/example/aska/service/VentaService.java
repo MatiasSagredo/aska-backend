@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.aska.model.Venta;
+import com.example.aska.repository.ProductosVentaRepository;
 import com.example.aska.repository.VentaRepository;
 
 import jakarta.transaction.Transactional;
@@ -16,6 +17,9 @@ public class VentaService {
 
     @Autowired
     private VentaRepository ventaRepository;
+
+    @Autowired
+    private ProductosVentaRepository productosVentaRepository;
 
     public List<Venta> findAll() {
         return ventaRepository.findAll();
@@ -30,7 +34,20 @@ public class VentaService {
     }
 
     public void deleteById(Integer id) {
-        ventaRepository.deleteById(id);
+        // Primero, verificar si el estudiante existe
+        Venta venta = ventaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venta no encontrado"));
+
+        // por que no hay un for acá, porque el id es único, no hay más de un estudiante
+        // con el mismo id
+
+        // Luego, eliminamos las reservas asociadas al estudiante
+        // generamos el método en el repositorio reservaRepository, no en el service, ya
+        // que no es necesario, este método se lo se ejecutará desde acá
+        productosVentaRepository.deleteByIdVenta(venta);
+
+        // Finalmente, eliminamos el estudiante
+        ventaRepository.delete(venta);
     }
 
     public Venta patchTalla(Integer id, Venta parcialVenta) {
