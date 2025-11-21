@@ -10,7 +10,6 @@ import com.example.aska.repository.ColoresRepository;
 import com.example.aska.repository.DiciplinasRepository;
 import com.example.aska.repository.GradosRepository;
 import com.example.aska.repository.ImagenesRepository;
-import com.example.aska.repository.MarcaRepository;
 import com.example.aska.repository.MaterialesRepository;
 import com.example.aska.repository.ProductoRepository;
 import com.example.aska.repository.ProductosVentaRepository;
@@ -36,8 +35,7 @@ public class ProductoService {
     @Autowired
     private GradosRepository gradosRepository;
 
-    @Autowired
-    private MarcaRepository marcaRepository;
+
 
     @Autowired
     private ImagenesRepository imagenesRepository;
