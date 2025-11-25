@@ -28,7 +28,7 @@ public class RolService {
     }
 
     public Rol findById(Integer id) {
-        return rolRepository.findById(id).orElseThrow();
+        return rolRepository.findById(id).orElseThrow(null);
     }
 
     public Rol save(Rol rol) {
