@@ -12,5 +12,6 @@ import com.example.aska.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
 
     List<Usuario> findByIdRol(Rol idRol);
+    Usuario findByEmailUsuario(String email);
 
 }

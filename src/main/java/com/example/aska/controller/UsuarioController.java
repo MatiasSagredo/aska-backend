@@ -3,6 +3,7 @@ package com.example.aska.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +22,14 @@ import com.example.aska.service.UsuarioService;
 @RequestMapping("/api/v1/usuarios")
 
 public class UsuarioController {
-    
+
     @Autowired
     private UsuarioService usuarioService;
 
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         List<Usuario> usuarios = usuarioService.findAll();
-        if(usuarios.isEmpty()) {
+        if (usuarios.isEmpty()) {
             return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(usuarios);
@@ -37,10 +38,19 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getUsuarioById(@PathVariable Integer id) {
         Usuario usuario = usuarioService.findById(id);
-        if(usuario == null) {
+        if (usuario == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(usuario);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<Usuario> loginUsuario(@RequestBody Usuario usuario) {
+        Usuario usuarioLogin = usuarioService.login(usuario);
+        if (usuarioLogin == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(usuarioLogin);
     }
 
     @PostMapping
@@ -63,7 +73,7 @@ public class UsuarioController {
     @PatchMapping("/{id}")
     public ResponseEntity<Usuario> partiallyUpdateUsuario(@PathVariable Integer id, @RequestBody Usuario usuario) {
         Usuario updatedUsuario = usuarioService.patchUsuario(id, usuario);
-        if(updatedUsuario == null) {
+        if (updatedUsuario == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(updatedUsuario);
@@ -71,7 +81,7 @@ public class UsuarioController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUsuario(@PathVariable Integer id) {
-        if(usuarioService.findById(id) == null) {
+        if (usuarioService.findById(id) == null) {
             return ResponseEntity.notFound().build();
         }
         usuarioService.deleteById(id);

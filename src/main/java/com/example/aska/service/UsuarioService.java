@@ -44,6 +44,22 @@ public class UsuarioService {
         return usuarioRepository.save(usuario);
     }
 
+    public Usuario login(Usuario usuario) {
+        if (usuario == null || usuario.getEmailUsuario() == null) {
+            return null;
+        }
+
+        Usuario usuarioLogin = usuarioRepository.findByEmailUsuario(usuario.getEmailUsuario());
+        if (usuarioLogin == null) {
+            return null;
+        }
+
+        if (passwordEncoder.matches(usuario.getContrasenaUsuario(), usuarioLogin.getContrasenaUsuario())) {
+            return usuarioLogin;
+        }
+        return null;
+    }
+
     public void deleteById(Integer id) {
         // Primero, verificar si el estudiante existe
         Usuario usuario = usuarioRepository.findById(id)
