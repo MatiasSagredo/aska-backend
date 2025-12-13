@@ -87,6 +87,12 @@ public class ProductoService {
         if (parcialProducto.getDescripcion() != null) {
             listaToUpdate.setDescripcion(parcialProducto.getDescripcion());
         }
+        if (parcialProducto.getPrecio() != null) {
+            listaToUpdate.setPrecio(parcialProducto.getPrecio());
+        }
+        if (parcialProducto.getIdMarca() != null) {
+            listaToUpdate.setIdMarca(parcialProducto.getIdMarca());
+        }
 
         return productoRepository.save(listaToUpdate);
     }
